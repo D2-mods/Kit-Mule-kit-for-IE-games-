@@ -4,7 +4,7 @@
 #### Info
 - Installs a kit that learns every kit/class ability (including HLAs and mod-added ones)
 - This kit has no other bonuses. It just learn all abilities.
-- usable with both EE and classic BG2
+- usable with EEs and classic BG2
 
 
 #### Installs under 3 classes:

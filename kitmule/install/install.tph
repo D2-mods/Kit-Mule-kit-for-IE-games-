@@ -30,7 +30,7 @@ COPY_EXISTING_REGEXP - ~clab.*\.2DA~ ~%MOD_FOLDER%/temp~
 
   READ_2DA_ENTRIES_NOW ~d2check2da~ 3
   FOR (r = 1; r < rows; ++r) BEGIN
-    FOR (c = 1; c < levelrev; ++c) BEGIN
+    FOR (c = 1; c <= levelrev; ++c) BEGIN
       READ_2DA_ENTRY_FORMER ~d2check2da~ r c entry
       PATCH_IF !(~%entry%~ STRING_MATCHES_REGEXP ~GA_.*~) BEGIN    // if %entry% does start with GA_
         INNER_ACTION BEGIN
@@ -48,7 +48,7 @@ COPY_EXISTING_REGEXP - ~clab.*\.2DA~ ~%MOD_FOLDER%/temp~
               REPLACE_TEXTUALLY ~%a[0-9]*%~ ~****~
               PRETTY_PRINT_2DA
             END
-	      BUT_ONLY
+          BUT_ONLY
         END
       END
     END
@@ -79,7 +79,7 @@ COPY_EXISTING_REGEXP - ~lu.*\.2DA~ ~%MOD_FOLDER%/temp~
               REPLACE_TEXTUALLY ~%a[0-9]*%~ ~****~
               PRETTY_PRINT_2DA
             END
-	      BUT_ONLY
+          BUT_ONLY
         END
       END
   END
@@ -101,7 +101,7 @@ COPY_EXISTING_REGEXP - GLOB ~.*\.2DA~ ~%MOD_FOLDER%/temp~
 
       READ_2DA_ENTRIES_NOW ~d2checkmods~ 3
       FOR (r = 1; r < rows; ++r) BEGIN
-        FOR (c = 1; c < levelrev; ++c) BEGIN
+        FOR (c = 1; c <= levelrev; ++c) BEGIN
           READ_2DA_ENTRY_FORMER ~d2checkmods~ r c entry
           PATCH_IF !(~%entry%~ STRING_MATCHES_REGEXP ~GA_.*~) BEGIN    // if %entry% does start with GA_
             INNER_ACTION BEGIN
@@ -119,7 +119,7 @@ COPY_EXISTING_REGEXP - GLOB ~.*\.2DA~ ~%MOD_FOLDER%/temp~
                   REPLACE_TEXTUALLY ~%a[0-9]*%~ ~****~
                   PRETTY_PRINT_2DA
                 END
-	          BUT_ONLY
+              BUT_ONLY
             END
           END
         END
