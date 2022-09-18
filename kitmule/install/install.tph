@@ -32,7 +32,7 @@ COPY_EXISTING_REGEXP - ~clab.*\.2DA~ ~%MOD_FOLDER%/temp~
   FOR (r = 1; r < rows; ++r) BEGIN
     FOR (c = 1; c < levelrev; ++c) BEGIN
       READ_2DA_ENTRY_FORMER ~d2check2da~ r c entry
-      PATCH_IF (~%entry%~ STRING_CONTAINS_REGEXP ~AP_~) BEGIN    // if %entry% does NOT contain AP_
+      PATCH_IF !(~%entry%~ STRING_MATCHES_REGEXP ~GA_.*~) BEGIN    // if %entry% does start with GA_
         INNER_ACTION BEGIN
           COPY_EXISTING ~d2kmule.2DA~ ~override~
             COUNT_REGEXP_INSTANCES ~%entry%~ count
@@ -63,7 +63,7 @@ COPY_EXISTING_REGEXP - ~lu.*\.2DA~ ~%MOD_FOLDER%/temp~
   READ_2DA_ENTRIES_NOW ~d2checkhla~ 3
   FOR (r = 1; r < rows; ++r) BEGIN
       READ_2DA_ENTRY_FORMER ~d2checkhla~ r 1 entry
-      PATCH_IF (~%entry%~ STRING_CONTAINS_REGEXP ~AP_~) BEGIN    // if %entry% does NOT contain AP_
+      PATCH_IF !(~%entry%~ STRING_MATCHES_REGEXP ~GA_.*~) BEGIN    // if %entry% does start with GA_
         INNER_ACTION BEGIN
           COPY_EXISTING ~d2kmule.2DA~ ~override~
             COUNT_REGEXP_INSTANCES ~%entry%~ count
@@ -103,7 +103,7 @@ COPY_EXISTING_REGEXP - GLOB ~.*\.2DA~ ~%MOD_FOLDER%/temp~
       FOR (r = 1; r < rows; ++r) BEGIN
         FOR (c = 1; c < levelrev; ++c) BEGIN
           READ_2DA_ENTRY_FORMER ~d2checkmods~ r c entry
-          PATCH_IF (~%entry%~ STRING_CONTAINS_REGEXP ~AP_~) BEGIN    // if %entry% does NOT contain AP_
+          PATCH_IF !(~%entry%~ STRING_MATCHES_REGEXP ~GA_.*~) BEGIN    // if %entry% does start with GA_
             INNER_ACTION BEGIN
               COPY_EXISTING ~d2kmule.2DA~ ~override~
                 COUNT_REGEXP_INSTANCES ~%entry%~ count

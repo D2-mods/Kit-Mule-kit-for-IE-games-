@@ -2,7 +2,7 @@
 
 
 #### Info
-- Installs a kit that has every special ability (including HLAs and mod-added ones)
+- Installs a kit that learns every kit/class ability (including HLAs and mod-added ones)
 - This kit has no other bonuses. It just learn all abilities.
 - usable with both EE and classic BG2
 
@@ -12,7 +12,7 @@
 - Bard
 - Druid
 
-NOTE: Install time will take a little longer than a normal kit mod
+NOTE: Install time may take a little longer than a normal kit mod
 
 
 #### config.ini
