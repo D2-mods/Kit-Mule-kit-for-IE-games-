@@ -5,7 +5,7 @@ GitHub: https://github.com/D2-mods/Kit-Mule-kit-for-IE-games-
 
 Info
 - Installs a kit that learns every kit/class ability (including HLAs and mod-added ones)
-- This kit has no other bonuses. It just learn all abilities.
+- The ability table is built at install time and is based on your current install.
 - usable with EEs and classic BG2
 
 
@@ -18,8 +18,20 @@ NOTE: Install time may take a little longer than a normal kit mod
 
 
 config.ini
-- set max level/column to check for in 2das (default = 20)
-- set a class to = 0 to prevent installing
+- set max level/column to check in kit tables (default = 20)
+- enable or disable scanning clab, hla, or mod files
+- enable or disable fighter, bard, or druid classes
 
 You can set max level to anything, but an error will occur 
 if it tries to read an entry that doesn't exist (due to uneven column numbers).
+
+
+
+Notes:
+- mod made with Notepad++, WeiDU, and Near Infinity
+- uses ADD_KIT_EX function by Argent77 (https://github.com/Argent77/A7-add_kit_ex)
+- LibIconv (http://gnuwin32.sourceforge.net/packages/libiconv.htm)
+
+v0.4
+- added options to disable scanning clab, hla, or mod files
+- kit now has 100 in Set Traps skill at level 1

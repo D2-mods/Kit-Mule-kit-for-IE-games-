@@ -1,5 +1,13 @@
 //Read config.ini
+
 COPY - ~%MOD_FOLDER%/config.ini~ ~%MOD_FOLDER%/temp~
+  COUNT_REGEXP_INSTANCES  ~clab.*=.*[^0-9]0[^0-9]*$~        noclab
+  COUNT_REGEXP_INSTANCES  ~hla.*=.*[^0-9]0[^0-9]*$~         nohla
+  COUNT_REGEXP_INSTANCES  ~other.*=.*[^0-9]0[^0-9]*$~       nomods
+
+  COUNT_REGEXP_INSTANCES  ~fighter.*=.*[^0-9]0[^0-9]*$~     nofighter
+  COUNT_REGEXP_INSTANCES  ~bard.*=.*[^0-9]0[^0-9]*$~        nobard
+  COUNT_REGEXP_INSTANCES  ~druid.*=.*[^0-9]0[^0-9]*$~       nodruid
 
   FOR (i = 1; i < 51; ++i) BEGIN
     COUNT_REGEXP_INSTANCES  ~Level.*=.*[^0-9]%i%[^0-9]*$~  ~level%i%~
@@ -15,24 +23,28 @@ END
 
 //Add abilities to 2da
 
-COPY ~%MOD_FOLDER%/files/kit0.2DA~ ~override/d2kmule.2DA~
+COPY ~%MOD_FOLDER%/files/settraps.SPL~  ~override/d2kmule.SPL~
+COPY ~%MOD_FOLDER%/files/kit0.2DA~      ~override/d2kmule.2DA~
+  LPF d2_kit_ability_adder INT_VAR passive=1 STR_VAR resource=~d2kmule~ END
 
 ////////////////////////////////////////////////////////////
 
 //Check CLAB files
 
-COPY_EXISTING_REGEXP - ~clab.*\.2DA~ ~%MOD_FOLDER%/temp~
+ACTION_IF (noclab = 0) BEGIN
+
+COPY_EXISTING_REGEXP - GLOB ~clab.*\.2DA~ ~%MOD_FOLDER%/temp~
   SET levelrev = level
   COUNT_2DA_COLS cols
-  COUNT_2DA_ROWS 3 rows
   SET col_count = (cols - 1)
   PATCH_IF (level > col_count) BEGIN SET levelrev = col_count END
 
+  COUNT_2DA_ROWS 3 rows
   READ_2DA_ENTRIES_NOW ~d2check2da~ 3
   FOR (r = 1; r < rows; ++r) BEGIN
     FOR (c = 1; c <= levelrev; ++c) BEGIN
       READ_2DA_ENTRY_FORMER ~d2check2da~ r c entry
-      PATCH_IF !(~%entry%~ STRING_MATCHES_REGEXP ~GA_.*~) BEGIN    // if %entry% does start with GA_
+      PATCH_IF !(~%entry%~ STRING_MATCHES_REGEXP ~GA_.*~) BEGIN    // if %entry% DOES start with GA_
         INNER_ACTION BEGIN
           COPY_EXISTING ~d2kmule.2DA~ ~override~
             COUNT_REGEXP_INSTANCES ~%entry%~ count
@@ -53,17 +65,21 @@ COPY_EXISTING_REGEXP - ~clab.*\.2DA~ ~%MOD_FOLDER%/temp~
       END
     END
   END
+
+END
   
 ////////////////////////////////////////////////////////////
 
 //Check HLA files
 
-COPY_EXISTING_REGEXP - ~lu.*\.2DA~ ~%MOD_FOLDER%/temp~
+ACTION_IF (nohla = 0) BEGIN
+
+COPY_EXISTING_REGEXP - GLOB ~lu.*\.2DA~ ~%MOD_FOLDER%/temp~
   COUNT_2DA_ROWS 3 rows
   READ_2DA_ENTRIES_NOW ~d2checkhla~ 3
   FOR (r = 1; r < rows; ++r) BEGIN
       READ_2DA_ENTRY_FORMER ~d2checkhla~ r 1 entry
-      PATCH_IF !(~%entry%~ STRING_MATCHES_REGEXP ~GA_.*~) BEGIN    // if %entry% does start with GA_
+      PATCH_IF !(~%entry%~ STRING_MATCHES_REGEXP ~GA_.*~) BEGIN    // if %entry% DOES start with GA_
         INNER_ACTION BEGIN
           COPY_EXISTING ~d2kmule.2DA~ ~override~
             COUNT_REGEXP_INSTANCES ~%entry%~ count
@@ -84,9 +100,13 @@ COPY_EXISTING_REGEXP - ~lu.*\.2DA~ ~%MOD_FOLDER%/temp~
       END
   END
 
+END
+
 ////////////////////////////////////////////////////////////
 
 //Check other files
+
+ACTION_IF (nomods = 0) BEGIN
 
 COPY_EXISTING_REGEXP - GLOB ~.*\.2DA~ ~%MOD_FOLDER%/temp~
   PATCH_IF (~%SOURCE_RES%~ STRING_MATCHES_REGEXP ~clab.*~) BEGIN    // if filename does NOT start with clab
@@ -95,15 +115,15 @@ COPY_EXISTING_REGEXP - GLOB ~.*\.2DA~ ~%MOD_FOLDER%/temp~
     PATCH_IF (check > 0) BEGIN
       SET levelrev = level
       COUNT_2DA_COLS cols
-      COUNT_2DA_ROWS 3 rows
       SET col_count = (cols - 1)
       PATCH_IF (level > col_count) BEGIN SET levelrev = col_count END
 
+      COUNT_2DA_ROWS 3 rows
       READ_2DA_ENTRIES_NOW ~d2checkmods~ 3
       FOR (r = 1; r < rows; ++r) BEGIN
         FOR (c = 1; c <= levelrev; ++c) BEGIN
           READ_2DA_ENTRY_FORMER ~d2checkmods~ r c entry
-          PATCH_IF !(~%entry%~ STRING_MATCHES_REGEXP ~GA_.*~) BEGIN    // if %entry% does start with GA_
+          PATCH_IF !(~%entry%~ STRING_MATCHES_REGEXP ~GA_.*~) BEGIN    // if %entry% DOES start with GA_
             INNER_ACTION BEGIN
               COPY_EXISTING ~d2kmule.2DA~ ~override~
                 COUNT_REGEXP_INSTANCES ~%entry%~ count
@@ -129,13 +149,9 @@ COPY_EXISTING_REGEXP - GLOB ~.*\.2DA~ ~%MOD_FOLDER%/temp~
   END
   END
 
+END
+
 ////////////////////////////////////////////////////////////
-
-COPY - ~%MOD_FOLDER%/config.ini~ ~%MOD_FOLDER%/temp~
-  COUNT_REGEXP_INSTANCES  ~fighter.*=.*[^0-9]0[^0-9]*$~     nofighter
-  COUNT_REGEXP_INSTANCES  ~bard.*=.*[^0-9]0[^0-9]*$~        nobard
-  COUNT_REGEXP_INSTANCES  ~druid.*=.*[^0-9]0[^0-9]*$~       nodruid
-
 
 //Add fighter kit
 
