@@ -1,0 +1,25 @@
+/*
+Max level to check in clab files (will likely have errors at 41+)
+*/
+
+Level = 20
+
+
+
+/*
+Set to = 0 to skip scanning
+*/
+
+clab   = 1
+hla    = 1
+other  = 1
+
+
+
+/*
+Set to = 0 to disable
+*/
+
+fighter  = 1
+bard     = 1
+druid    = 1

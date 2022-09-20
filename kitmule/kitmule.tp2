@@ -1,6 +1,6 @@
 BACKUP ~weidu_external/backup/kitmule~
 AUTHOR ~~
-VERSION ~0.4~
+VERSION ~0.5~
 
 ALWAYS
   ACTION_BASH_FOR ~%MOD_FOLDER%/lib~ ~.*\.tpa~ BEGIN    // function list
@@ -24,6 +24,10 @@ ALWAYS
       noconvert_array  = ~d2noconvert~
       reload_array     = ~d2reload~
   END
+
+  OUTER_TEXT_SPRINT files      ~%MOD_FOLDER%/files~    // folder variables
+  OUTER_TEXT_SPRINT install    ~%MOD_FOLDER%/install~
+  OUTER_TEXT_SPRINT workspace  ~weidu_external/Workspace~
 END
 
 AUTO_EVAL_STRINGS
@@ -36,11 +40,19 @@ LANGUAGE ~English~
 
 //Kit Mule
 		 
-BEGIN @99
+BEGIN @11
 DESIGNATED 9999
 REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet bg2 tob tutu tutu_totsc iwd_in_bg2 ca~) ~Game not supported~
+SUBCOMPONENT @10
 LABEL ~D2_KIT_MULE~
-INCLUDE ~%MOD_FOLDER%/install/install.tph~
+COPY ~%MOD_FOLDER%/config.ini~ ~%workspace%~
+INCLUDE ~%install%/install.tph~
+
+BEGIN @12
+SUBCOMPONENT @10
+LABEL ~D2_KIT_MULE_DEFAULT~
+COPY ~%files%/config~ ~%workspace%/config.ini~
+INCLUDE ~%install%/install.tph~
 
 
 

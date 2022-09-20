@@ -1,6 +1,6 @@
 //Read config.ini
 
-COPY - ~%MOD_FOLDER%/config.ini~ ~%MOD_FOLDER%/temp~
+COPY - ~%workspace%/config.ini~ ~%workspace%~
   COUNT_REGEXP_INSTANCES  ~clab.*=.*[^0-9]0[^0-9]*$~        noclab
   COUNT_REGEXP_INSTANCES  ~hla.*=.*[^0-9]0[^0-9]*$~         nohla
   COUNT_REGEXP_INSTANCES  ~other.*=.*[^0-9]0[^0-9]*$~       nomods
@@ -23,8 +23,8 @@ END
 
 //Add abilities to 2da
 
-COPY ~%MOD_FOLDER%/files/settraps.SPL~  ~override/d2kmule.SPL~
-COPY ~%MOD_FOLDER%/files/kit0.2DA~      ~override/d2kmule.2DA~
+COPY ~%files%/settraps.SPL~  ~override/d2kmule.SPL~
+COPY ~%files%/kit0.2DA~      ~override/d2kmule.2DA~
   LPF d2_kit_ability_adder INT_VAR passive=1 STR_VAR resource=~d2kmule~ END
 
 ////////////////////////////////////////////////////////////
@@ -33,7 +33,7 @@ COPY ~%MOD_FOLDER%/files/kit0.2DA~      ~override/d2kmule.2DA~
 
 ACTION_IF (noclab = 0) BEGIN
 
-COPY_EXISTING_REGEXP - GLOB ~clab.*\.2DA~ ~%MOD_FOLDER%/temp~
+COPY_EXISTING_REGEXP - GLOB ~clab.*\.2DA~ ~%workspace%~
   SET levelrev = level
   COUNT_2DA_COLS cols
   SET col_count = (cols - 1)
@@ -74,7 +74,7 @@ END
 
 ACTION_IF (nohla = 0) BEGIN
 
-COPY_EXISTING_REGEXP - GLOB ~lu.*\.2DA~ ~%MOD_FOLDER%/temp~
+COPY_EXISTING_REGEXP - GLOB ~lu.*\.2DA~ ~%workspace%~
   COUNT_2DA_ROWS 3 rows
   READ_2DA_ENTRIES_NOW ~d2checkhla~ 3
   FOR (r = 1; r < rows; ++r) BEGIN
@@ -108,7 +108,7 @@ END
 
 ACTION_IF (nomods = 0) BEGIN
 
-COPY_EXISTING_REGEXP - GLOB ~.*\.2DA~ ~%MOD_FOLDER%/temp~
+COPY_EXISTING_REGEXP - GLOB ~.*\.2DA~ ~%workspace%~
   PATCH_IF (~%SOURCE_RES%~ STRING_MATCHES_REGEXP ~clab.*~) BEGIN    // if filename does NOT start with clab
   PATCH_IF (~%SOURCE_RES%~ STRING_MATCHES_REGEXP ~lu.*~) BEGIN      // if filename does NOT start with lu
     COUNT_REGEXP_INSTANCES ~GA_~ check
@@ -155,7 +155,8 @@ END
 
 //Add fighter kit
 
-ACTION_IF (%nofighter% = 0) BEGIN
+ACTION_IF (nofighter = 0) BEGIN
+
 LAF ADD_KIT_EX
   INT_VAR
     kit_class = 2
@@ -165,15 +166,14 @@ LAF ADD_KIT_EX
   STR_VAR
     kit_name = ~D2KITMULE~
     clab_path = ~d2kmule~
-  RET 
-    kit_id
 END
 END
 
 
 //Add bard kit
 
-ACTION_IF (%nobard% = 0) BEGIN
+ACTION_IF (nobard = 0) BEGIN
+
 LAF ADD_KIT_EX
   INT_VAR
     kit_class = 5
@@ -183,15 +183,14 @@ LAF ADD_KIT_EX
   STR_VAR
     kit_name = ~D2KITMULEB~
     clab_path = ~d2kmule~
-  RET 
-    kit_id
 END
 END
 
 
 //Add druid kit
 
-ACTION_IF (%nodruid% = 0) BEGIN
+ACTION_IF (nodruid = 0) BEGIN
+
 LAF ADD_KIT_EX
   INT_VAR
     kit_class = 11
@@ -201,8 +200,6 @@ LAF ADD_KIT_EX
   STR_VAR
     kit_name = ~D2KITMULED~
     clab_path = ~d2kmule~
-  RET 
-    kit_id
 END
 END
 
