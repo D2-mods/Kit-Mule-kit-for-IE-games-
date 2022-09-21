@@ -13,6 +13,10 @@ COPY - ~%workspace%/config.ini~ ~%workspace%~
     COUNT_REGEXP_INSTANCES  ~Level.*=.*[^0-9]%i%[^0-9]*$~  ~level%i%~
   END
 
+
+//Set %level% variable
+SET level = 20    // this is used if "Level" setting in config is outside the range of 1-50
+
 OUTER_FOR (n = 1; n < 51; ++n) BEGIN
   ACTION_IF (~level%n%~ != 0) BEGIN 
     OUTER_SET level = n
@@ -22,7 +26,6 @@ END
 
 
 //Add abilities to 2da
-
 COPY ~%files%/settraps.SPL~  ~override/d2kmule.SPL~
 COPY ~%files%/kit0.2DA~      ~override/d2kmule.2DA~
   LPF d2_kit_ability_adder INT_VAR passive=1 STR_VAR resource=~d2kmule~ END
@@ -39,6 +42,7 @@ COPY_EXISTING_REGEXP - GLOB ~clab.*\.2DA~ ~%workspace%~
   SET col_count = (cols - 1)
   PATCH_IF (level > col_count) BEGIN SET levelrev = col_count END
 
+  LPF 2DA_MISSING_COLS END    // fill entries if missing to prevent errors
   COUNT_2DA_ROWS 3 rows
   READ_2DA_ENTRIES_NOW ~d2check2da~ 3
   FOR (r = 1; r < rows; ++r) BEGIN
@@ -118,6 +122,7 @@ COPY_EXISTING_REGEXP - GLOB ~.*\.2DA~ ~%workspace%~
       SET col_count = (cols - 1)
       PATCH_IF (level > col_count) BEGIN SET levelrev = col_count END
 
+      LPF 2DA_MISSING_COLS END    // fill entries if missing to prevent errors
       COUNT_2DA_ROWS 3 rows
       READ_2DA_ENTRIES_NOW ~d2checkmods~ 3
       FOR (r = 1; r < rows; ++r) BEGIN
@@ -156,7 +161,6 @@ END
 //Add fighter kit
 
 ACTION_IF (nofighter = 0) BEGIN
-
 LAF ADD_KIT_EX
   INT_VAR
     kit_class = 2
@@ -173,7 +177,6 @@ END
 //Add bard kit
 
 ACTION_IF (nobard = 0) BEGIN
-
 LAF ADD_KIT_EX
   INT_VAR
     kit_class = 5
@@ -190,7 +193,6 @@ END
 //Add druid kit
 
 ACTION_IF (nodruid = 0) BEGIN
-
 LAF ADD_KIT_EX
   INT_VAR
     kit_class = 11

@@ -20,5 +20,4 @@ NOTE: Install time may take a little longer than a normal kit mod
 - enable or disable scanning clab, hla, or mod files
 - enable or disable installing fighter, bard, or druid kits
 
-You can set max level to anything, but an error will occur if it tries 
-to read an entry that doesn't exist (due to uneven column numbers).
+The "level" setting will accept values from 1-50. Any other number will default to 20.

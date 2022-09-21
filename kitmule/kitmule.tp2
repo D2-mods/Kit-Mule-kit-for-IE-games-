@@ -1,6 +1,6 @@
 BACKUP ~weidu_external/backup/kitmule~
 AUTHOR ~~
-VERSION ~0.5~
+VERSION ~0.6~
 
 ALWAYS
   ACTION_BASH_FOR ~%MOD_FOLDER%/lib~ ~.*\.tpa~ BEGIN    // function list
@@ -28,6 +28,8 @@ ALWAYS
   OUTER_TEXT_SPRINT files      ~%MOD_FOLDER%/files~    // folder variables
   OUTER_TEXT_SPRINT install    ~%MOD_FOLDER%/install~
   OUTER_TEXT_SPRINT workspace  ~weidu_external/Workspace~
+
+  CLEAR_INLINED
 END
 
 AUTO_EVAL_STRINGS
