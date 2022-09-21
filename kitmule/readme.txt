@@ -1,4 +1,4 @@
-Kit Mule
+Kit Mule kit
 
 GitHub: https://github.com/D2-mods/Kit-Mule-kit-for-IE-games-
 
@@ -38,8 +38,8 @@ v0.4
 - kit now has 100 in Set Traps skill at level 1
 
 v0.5
-- added subcomponent: Use default settings (ignores config.ini but doesn't reset it)
+- added subcomponent: Use default settings (ignores config.ini but doesn't undo edits)
 
 v0.6
 - config file: Level settings above 40 should no longer cause errors
-- Note that this mod doesn't edit any existing 2da files (everything is done inlined)
+- Note that this mod doesn't edit any existing 2da files during the scanning process (everything is done inlined)

@@ -1,5 +1,5 @@
 /*
-Max level to check in clab files (will likely have errors at 41+)
+Max level to check in clab files (range from 1-50)
 */
 
 Level = 20
