@@ -40,21 +40,39 @@ LANGUAGE ~English~
          ~kitmule/tra/english/main.tra~
 		
 
+////////////////////////////////////////////////////////////
+
+//Recreate abilities table (requires main component)
+
+BEGIN @99
+DESIGNATED 99
+REQUIRE_PREDICATE ((FILE_EXISTS ~override/d2kmule.SPL~) AND 
+                   (FILE_EXISTS ~override/d2kmule.2DA~)) ~~
+NO_LOG_RECORD
+LABEL ~D2_KIT_MULE_RECREATE~
+INCLUDE ~%install%/recreate.tph~
+
+////////////////////////////////////////////////////////////
+
 //Kit Mule kit
 		 
 BEGIN @11    // Use config file
 DESIGNATED 9999
 REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet bg2 tob tutu tutu_totsc iwd_in_bg2 ca~) ~Game not supported~
+REQUIRE_PREDICATE !(FILE_EXISTS ~override/d2marker~) ~~
 SUBCOMPONENT @10
 LABEL ~D2_KIT_MULE~
-COPY ~%MOD_FOLDER%/config.ini~ ~%workspace%~
+COPY - ~%MOD_FOLDER%/config.ini~ ~%workspace%~
 INCLUDE ~%install%/install.tph~
 
 BEGIN @12    // Use default settings
+REQUIRE_PREDICATE !(FILE_EXISTS ~override/d2marker~) ~~
 SUBCOMPONENT @10
 LABEL ~D2_KIT_MULE_DEFAULT~
-COPY ~%files%/config~ ~%workspace%/config.ini~
+COPY - ~%files%/config~ ~%workspace%/config.ini~
 INCLUDE ~%install%/install.tph~
+
+////////////////////////////////////////////////////////////
 
 
 

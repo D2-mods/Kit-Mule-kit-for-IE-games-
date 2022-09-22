@@ -1,0 +1,132 @@
+//Create abilities 2da
+
+COPY ~%files%/kit0.2DA~      ~override/d2kmule.2DA~
+  LPF d2_kit_ability_adder INT_VAR passive=1 STR_VAR resource=~d2kmule~ END
+
+////////////////////////////////////////////////////////////
+
+//Check CLAB files
+
+ACTION_IF (noclab = 0) BEGIN
+
+COPY_EXISTING_REGEXP - GLOB ~clab.*\.2DA~ ~%workspace%~
+  SET levelrev = level
+  COUNT_2DA_COLS cols
+  SET col_count = (cols - 1)
+  PATCH_IF (level > col_count) BEGIN SET levelrev = col_count END
+
+  LPF 2DA_MISSING_COLS END    // fill entries if missing to prevent errors
+  COUNT_2DA_ROWS 3 rows
+  READ_2DA_ENTRIES_NOW ~d2check2da~ 3
+  FOR (r = 1; r < rows; ++r) BEGIN
+    FOR (c = 1; c <= levelrev; ++c) BEGIN
+      READ_2DA_ENTRY_FORMER ~d2check2da~ r c entry
+      PATCH_IF !(~%entry%~ STRING_MATCHES_REGEXP ~GA_.*~) BEGIN    // if %entry% DOES start with GA_
+        INNER_ACTION BEGIN
+          COPY_EXISTING ~d2kmule.2DA~ ~override~
+            COUNT_REGEXP_INSTANCES ~%entry%~ count
+            PATCH_IF (count = 0) BEGIN
+              COUNT_2DA_ROWS 3 kmulerows
+              FOR (x = 1; x <= 50; x += 2) BEGIN
+                TEXT_SPRINT ~a%x%~ ~%entry%~
+              END
+
+              INSERT_2DA_ROW kmulerows 3 ~ABILITY00 %a1% %a2% %a3% %a4% %a5% %a6% %a7% %a8% %a9% %a10% %a11% %a12% %a13% %a14% %a15% %a16% %a17% %a18% %a19% %a20% %a21% %a22% %a23% %a24% %a25% %a26% %a27% %a28% %a29% %a30% %a31% %a32% %a33% %a34% %a35% %a36% %a37% %a38% %a39% %a40% %a41% %a42% %a43% %a44% %a45% %a46% %a47% %a48% %a49% %a50%~
+              COUNT_REGEXP_INSTANCES ~ABILITY[0-9]*~ count
+              REPLACE_TEXTUALLY ~ABILITY00~ ~ABILITY%count%~
+              REPLACE_TEXTUALLY ~%a[0-9]*%~ ~****~
+              PRETTY_PRINT_2DA
+            END
+          BUT_ONLY
+        END
+      END
+    END
+  END
+
+END
+  
+////////////////////////////////////////////////////////////
+
+//Check HLA files
+
+ACTION_IF (nohla = 0) BEGIN
+
+COPY_EXISTING_REGEXP - GLOB ~lu.*\.2DA~ ~%workspace%~
+  COUNT_2DA_ROWS 3 rows
+  READ_2DA_ENTRIES_NOW ~d2checkhla~ 3
+  FOR (r = 1; r < rows; ++r) BEGIN
+      READ_2DA_ENTRY_FORMER ~d2checkhla~ r 1 entry
+      PATCH_IF !(~%entry%~ STRING_MATCHES_REGEXP ~GA_.*~) BEGIN    // if %entry% DOES start with GA_
+        INNER_ACTION BEGIN
+          COPY_EXISTING ~d2kmule.2DA~ ~override~
+            COUNT_REGEXP_INSTANCES ~%entry%~ count
+            PATCH_IF (count = 0) BEGIN
+              COUNT_2DA_ROWS 3 kmulerows
+              FOR (x = 1; x <= 50; x += 2) BEGIN
+                TEXT_SPRINT ~a%x%~ ~%entry%~
+              END
+
+              INSERT_2DA_ROW kmulerows 3 ~ABILITY00 %a1% %a2% %a3% %a4% %a5% %a6% %a7% %a8% %a9% %a10% %a11% %a12% %a13% %a14% %a15% %a16% %a17% %a18% %a19% %a20% %a21% %a22% %a23% %a24% %a25% %a26% %a27% %a28% %a29% %a30% %a31% %a32% %a33% %a34% %a35% %a36% %a37% %a38% %a39% %a40% %a41% %a42% %a43% %a44% %a45% %a46% %a47% %a48% %a49% %a50%~
+              COUNT_REGEXP_INSTANCES ~ABILITY[0-9]*~ count
+              REPLACE_TEXTUALLY ~ABILITY00~ ~ABILITY%count%~
+              REPLACE_TEXTUALLY ~%a[0-9]*%~ ~****~
+              PRETTY_PRINT_2DA
+            END
+          BUT_ONLY
+        END
+      END
+  END
+
+END
+
+////////////////////////////////////////////////////////////
+
+//Check other files
+
+ACTION_IF (nomods = 0) BEGIN
+
+COPY_EXISTING_REGEXP - GLOB ~.*\.2DA~ ~%workspace%~
+  PATCH_IF (~%SOURCE_RES%~ STRING_MATCHES_REGEXP ~clab.*~) BEGIN    // if filename does NOT start with clab
+  PATCH_IF (~%SOURCE_RES%~ STRING_MATCHES_REGEXP ~lu.*~) BEGIN      // if filename does NOT start with lu
+    COUNT_REGEXP_INSTANCES ~GA_~ check
+    PATCH_IF (check > 0) BEGIN
+      SET levelrev = level
+      COUNT_2DA_COLS cols
+      SET col_count = (cols - 1)
+      PATCH_IF (level > col_count) BEGIN SET levelrev = col_count END
+
+      LPF 2DA_MISSING_COLS END    // fill entries if missing to prevent errors
+      COUNT_2DA_ROWS 3 rows
+      READ_2DA_ENTRIES_NOW ~d2checkmods~ 3
+      FOR (r = 1; r < rows; ++r) BEGIN
+        FOR (c = 1; c <= levelrev; ++c) BEGIN
+          READ_2DA_ENTRY_FORMER ~d2checkmods~ r c entry
+          PATCH_IF !(~%entry%~ STRING_MATCHES_REGEXP ~GA_.*~) BEGIN    // if %entry% DOES start with GA_
+            INNER_ACTION BEGIN
+              COPY_EXISTING ~d2kmule.2DA~ ~override~
+                COUNT_REGEXP_INSTANCES ~%entry%~ count
+                PATCH_IF (count = 0) BEGIN
+                  COUNT_2DA_ROWS 3 kmulerows
+                  FOR (x = 1; x <= 50; x += 2) BEGIN
+                    TEXT_SPRINT ~a%x%~ ~%entry%~
+                  END
+
+                  INSERT_2DA_ROW kmulerows 3 ~ABILITY00 %a1% %a2% %a3% %a4% %a5% %a6% %a7% %a8% %a9% %a10% %a11% %a12% %a13% %a14% %a15% %a16% %a17% %a18% %a19% %a20% %a21% %a22% %a23% %a24% %a25% %a26% %a27% %a28% %a29% %a30% %a31% %a32% %a33% %a34% %a35% %a36% %a37% %a38% %a39% %a40% %a41% %a42% %a43% %a44% %a45% %a46% %a47% %a48% %a49% %a50%~
+                  COUNT_REGEXP_INSTANCES ~ABILITY[0-9]*~ count
+                  REPLACE_TEXTUALLY ~ABILITY00~ ~ABILITY%count%~
+                  REPLACE_TEXTUALLY ~%a[0-9]*%~ ~****~
+                  PRETTY_PRINT_2DA
+                END
+              BUT_ONLY
+            END
+          END
+        END
+      END
+
+    END
+  END
+  END
+
+END
+
+////////////////////////////////////////////////////////////

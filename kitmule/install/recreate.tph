@@ -1,0 +1,41 @@
+//Recreate abilities table
+
+/*
+This component updates ONLY the abilities table of the kit(s)
+It cannot alter which kits are installed
+If "Use config file" was chosen, this will use the current file in the mod folder
+*/
+
+
+ACTION_IF (MOD_IS_INSTALLED ~kitmule.tp2~ (ID_OF_LABEL ~kitmule.tp2~ ~D2_KIT_MULE~)) BEGIN 
+  COPY - ~%MOD_FOLDER%/config.ini~ ~%workspace%~ 
+END
+
+ACTION_IF (MOD_IS_INSTALLED ~kitmule.tp2~ (ID_OF_LABEL ~kitmule.tp2~ ~D2_KIT_MULE_DEFAULT~)) BEGIN 
+  COPY - ~%files%/config~ ~%workspace%/config.ini~ 
+END
+
+
+INCLUDE ~%install%/config.tph~
+INCLUDE ~%install%/abilities.tph~
+
+
+
+//Ends current run of WeiDU immediately after this component installs
+//Just adds a marker file to override, then uses command line to delete it at exit
+
+COPY ~%files%/config~ ~override/d2marker~
+
+ACTION_IF (~%WEIDU_OS%~ STRING_EQUAL_CASE ~win32~) BEGIN
+  AT_EXIT ~del /f /q override\d2marker >nul 2>&1~
+END ELSE BEGIN
+  AT_EXIT ~rm -f override/d2marker >/dev/null 2>&1~
+END
+
+
+/*
+This component does not write to weidu.log. 
+This means it cannot be uninstalled, but it doesn't need to be.
+This is more of an update component for the 2da file added by the main component.
+If the main component is uninstalled, any files it adds are removed.
+*/

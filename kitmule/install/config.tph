@@ -1,0 +1,25 @@
+//Read config.ini
+
+COPY - ~%workspace%/config.ini~ ~%workspace%~
+  COUNT_REGEXP_INSTANCES  ~clab.*=.*[^0-9]0[^0-9]*$~        noclab
+  COUNT_REGEXP_INSTANCES  ~hla.*=.*[^0-9]0[^0-9]*$~         nohla
+  COUNT_REGEXP_INSTANCES  ~other.*=.*[^0-9]0[^0-9]*$~       nomods
+
+  COUNT_REGEXP_INSTANCES  ~fighter.*=.*[^0-9]0[^0-9]*$~     nofighter
+  COUNT_REGEXP_INSTANCES  ~bard.*=.*[^0-9]0[^0-9]*$~        nobard
+  COUNT_REGEXP_INSTANCES  ~druid.*=.*[^0-9]0[^0-9]*$~       nodruid
+
+  FOR (i = 1; i < 51; ++i) BEGIN
+    COUNT_REGEXP_INSTANCES  ~Level.*=.*[^0-9]%i%[^0-9]*$~  ~level%i%~
+  END
+
+
+//Set %level% variable
+
+SET level = 20    // this is used if "Level" setting in config is outside the range of 1-50
+
+OUTER_FOR (n = 1; n < 51; ++n) BEGIN
+  ACTION_IF (~level%n%~ != 0) BEGIN 
+    OUTER_SET level = n
+  END
+END
