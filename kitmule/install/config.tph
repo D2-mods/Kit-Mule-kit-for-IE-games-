@@ -23,3 +23,7 @@ OUTER_FOR (n = 1; n < 51; ++n) BEGIN
     OUTER_SET level = n
   END
 END
+
+
+//Set kit variable
+OUTER_TEXT_SPRINT kitid  ~d2kmule~

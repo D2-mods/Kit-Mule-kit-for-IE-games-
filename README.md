@@ -6,6 +6,12 @@
 - The ability table is built at install time and is based on your current install.
 - usable with EEs and classic BG2
 
+```
+v1.0
+- Added component: Recreate abilities table
+- This lets you update kit abilities without reinstalling everything (more info in readme)
+```
+
 
 #### Installs under 3 classes:
 - Fighter

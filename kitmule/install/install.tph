@@ -2,7 +2,7 @@
 INCLUDE ~%install%/config.tph~
 
 //Gives 100 in Set Traps
-COPY ~%files%/settraps.SPL~  ~override/d2kmule.SPL~
+COPY ~%files%/settraps.SPL~  ~override/%kitid%.SPL~
 
 //Create abilities 2da
 INCLUDE ~%install%/abilities.tph~
@@ -20,7 +20,7 @@ LAF ADD_KIT_EX
     help = RESOLVE_STR_REF (@3)
   STR_VAR
     kit_name = ~D2KITMULE~
-    clab_path = ~d2kmule~
+    clab_path = ~%kitid%~
 END
 END
 
@@ -36,7 +36,7 @@ LAF ADD_KIT_EX
     help = RESOLVE_STR_REF (@3)
   STR_VAR
     kit_name = ~D2KITMULEB~
-    clab_path = ~d2kmule~
+    clab_path = ~%kitid%~
 END
 END
 
@@ -52,7 +52,7 @@ LAF ADD_KIT_EX
     help = RESOLVE_STR_REF (@3)
   STR_VAR
     kit_name = ~D2KITMULED~
-    clab_path = ~d2kmule~
+    clab_path = ~%kitid%~
 END
 END
 

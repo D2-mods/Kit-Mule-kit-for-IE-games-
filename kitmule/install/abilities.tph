@@ -1,7 +1,7 @@
 //Create abilities 2da
 
-COPY ~%files%/kit0.2DA~      ~override/d2kmule.2DA~
-  LPF d2_kit_ability_adder INT_VAR passive=1 STR_VAR resource=~d2kmule~ END
+COPY ~%files%/kit0.2DA~      ~override/%kitid%.2DA~
+  LPF d2_kit_ability_adder INT_VAR passive=1 STR_VAR resource=~%kitid%~ END
 
 ////////////////////////////////////////////////////////////
 
@@ -23,7 +23,7 @@ COPY_EXISTING_REGEXP - GLOB ~clab.*\.2DA~ ~%workspace%~
       READ_2DA_ENTRY_FORMER ~d2check2da~ r c entry
       PATCH_IF !(~%entry%~ STRING_MATCHES_REGEXP ~GA_.*~) BEGIN    // if %entry% DOES start with GA_
         INNER_ACTION BEGIN
-          COPY_EXISTING ~d2kmule.2DA~ ~override~
+          COPY_EXISTING ~%kitid%.2DA~ ~override~
             COUNT_REGEXP_INSTANCES ~%entry%~ count
             PATCH_IF (count = 0) BEGIN
               COUNT_2DA_ROWS 3 kmulerows
@@ -58,7 +58,7 @@ COPY_EXISTING_REGEXP - GLOB ~lu.*\.2DA~ ~%workspace%~
       READ_2DA_ENTRY_FORMER ~d2checkhla~ r 1 entry
       PATCH_IF !(~%entry%~ STRING_MATCHES_REGEXP ~GA_.*~) BEGIN    // if %entry% DOES start with GA_
         INNER_ACTION BEGIN
-          COPY_EXISTING ~d2kmule.2DA~ ~override~
+          COPY_EXISTING ~%kitid%.2DA~ ~override~
             COUNT_REGEXP_INSTANCES ~%entry%~ count
             PATCH_IF (count = 0) BEGIN
               COUNT_2DA_ROWS 3 kmulerows
@@ -103,7 +103,7 @@ COPY_EXISTING_REGEXP - GLOB ~.*\.2DA~ ~%workspace%~
           READ_2DA_ENTRY_FORMER ~d2checkmods~ r c entry
           PATCH_IF !(~%entry%~ STRING_MATCHES_REGEXP ~GA_.*~) BEGIN    // if %entry% DOES start with GA_
             INNER_ACTION BEGIN
-              COPY_EXISTING ~d2kmule.2DA~ ~override~
+              COPY_EXISTING ~%kitid%.2DA~ ~override~
                 COUNT_REGEXP_INSTANCES ~%entry%~ count
                 PATCH_IF (count = 0) BEGIN
                   COUNT_2DA_ROWS 3 kmulerows

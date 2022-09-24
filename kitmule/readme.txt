@@ -8,7 +8,7 @@ Info
 - The ability table is built at install time and is based on your current install.
 - usable with EEs and classic BG2
 
-v0.7
+v1.0
 - Added component: Recreate abilities table
 - This lets you update kit abilities at any time (more info below)
 
@@ -40,10 +40,8 @@ Component info:
 2. Recreate abilities table
 	- Can be reinstalled at any time (does not appear in weidu.log)
 	- This component updates ONLY the abilities table of the kit(s)
-	- It cannot alter which kits are installed
+	- It cannot change which kits are installed
 	- If "Use config file" was chosen, this will use the current file in the mod folder
-
-Uninstalling the main component will remove all mod files from the override.
 
 ////////////////////////////////////////////////////////////
 
@@ -65,10 +63,10 @@ v0.6
 - config file: Level settings above 40 should no longer cause errors
 - Note that this mod doesn't edit any existing 2da files during the scanning process (everything is done inlined)
 
-v0.7
+v1.0
 - Added component: Recreate abilities table
 	- This component can be reinstalled at any time after the main component is installed
-	- It's basically a way to update the abilities list for the kit
+	- It allows you to update the kit's abilities without needing to reinstall everything
 	- It does not appear in weidu.log and can't be uninstalled (but doesn't need to be)
 	- All mod files are removed from the override if the main component is uninstalled
-- related to this, I split the install tph into multiple files to make everything work smoothly
+- reorganized install folder files

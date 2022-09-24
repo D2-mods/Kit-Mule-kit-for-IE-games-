@@ -2,7 +2,7 @@
 
 /*
 This component updates ONLY the abilities table of the kit(s)
-It cannot alter which kits are installed
+It cannot change which kits are installed
 If "Use config file" was chosen, this will use the current file in the mod folder
 */
 
@@ -28,7 +28,8 @@ COPY ~%files%/config~ ~override/d2marker~
 
 ACTION_IF (~%WEIDU_OS%~ STRING_EQUAL_CASE ~win32~) BEGIN
   AT_EXIT ~del /f /q override\d2marker >nul 2>&1~
-END ELSE BEGIN
+END
+ELSE BEGIN
   AT_EXIT ~rm -f override/d2marker >/dev/null 2>&1~
 END
 
