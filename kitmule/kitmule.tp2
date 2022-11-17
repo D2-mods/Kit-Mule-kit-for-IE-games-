@@ -38,6 +38,13 @@ LANGUAGE ~English~
          ~english~
          ~kitmule/tra/english/setup.tra~
          ~kitmule/tra/english/main.tra~
+		 
+LANGUAGE ~French~
+         ~french~
+         ~kitmule/tra/english/setup.tra~
+         ~kitmule/tra/english/main.tra~
+         ~kitmule/tra/french/setup.tra~
+         ~kitmule/tra/french/main.tra~
 		
 
 ////////////////////////////////////////////////////////////
