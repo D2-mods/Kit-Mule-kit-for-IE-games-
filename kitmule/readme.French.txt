@@ -52,16 +52,9 @@ Notes:
 - uses 2DA_MISSING_COLS function by K4thos (https://github.com/K4thos/IE-code-repository)
 - LibIconv (http://gnuwin32.sourceforge.net/packages/libiconv.htm)
 
-v0.4
-- added options to disable scanning clab, hla, or mod files
-- kit now has 100 in Set Traps skill at level 1
-
-v0.5
-- added subcomponent: Use default settings (ignores config.ini but doesn't undo edits)
-
-v0.6
-- config file: Level settings above 40 should no longer cause errors
-- Note that this mod doesn't edit any existing 2da files during the scanning process (everything is done inlined)
+v1.1
+- Added French translation by 11jo
+- Each kit has a separate abilities table now
 
 v1.0
 - Added component: Recreate abilities table
@@ -70,3 +63,14 @@ v1.0
 	- It does not appear in weidu.log and can't be uninstalled (but doesn't need to be)
 	- All mod files are removed from the override if the main component is uninstalled
 - reorganized install folder files
+
+v0.6
+- config file: Level settings above 40 should no longer cause errors
+- Note that this mod doesn't edit any existing 2da files during the scanning process (everything is done inlined)
+
+v0.5
+- added subcomponent: Use default settings (ignores config.ini but doesn't undo edits)
+
+v0.4
+- added options to disable scanning clab, hla, or mod files
+- kit now has 100 in Set Traps skill at level 1

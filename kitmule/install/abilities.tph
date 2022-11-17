@@ -1,6 +1,6 @@
 //Create abilities 2da
 
-COPY ~%files%/kit0.2DA~      ~override/%kitid%.2DA~
+COPY ~%files%/kit0.2DA~  ~override/%kitid%.2DA~
   LPF d2_kit_ability_adder INT_VAR passive=1 STR_VAR resource=~%kitid%~ END
 
 ////////////////////////////////////////////////////////////
