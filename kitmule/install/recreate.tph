@@ -16,8 +16,33 @@ ACTION_IF (MOD_IS_INSTALLED ~kitmule.tp2~ (ID_OF_LABEL ~kitmule.tp2~ ~D2_KIT_MUL
 END
 
 
+
 INCLUDE ~%install%/config.tph~
 INCLUDE ~%install%/abilities.tph~
+
+ACTION_IF (FILE_EXISTS ~override/%kitid%b.2DA~) BEGIN
+  COPY_EXISTING ~%kitid%.2DA~  ~override/%kitid%b.2DA~
+    PATCH_IF (GAME_IS ~iwdee~) BEGIN 
+      LPF d2_kit_ability_adder INT_VAR passive=1 STR_VAR resource=~#BARD-1~ END
+    END
+    ELSE BEGIN 
+      LPF d2_kit_ability_adder INT_VAR passive=1 STR_VAR resource=~FJBARD~ END
+    END
+END
+
+ACTION_IF (FILE_EXISTS ~override/%kitid%d.2DA~) BEGIN
+  COPY_EXISTING ~%kitid%.2DA~  ~override/%kitid%d.2DA~
+    PATCH_IF (GAME_IS ~iwdee~) BEGIN 
+      LPF d2_kit_ability_adder INT_VAR level=15 passive=1 STR_VAR resource=~SPCL939~ END
+      LPF d2_kit_ability_adder INT_VAR level=9 passive=1 STR_VAR resource=~SPCL924~ END
+    END
+    ELSE BEGIN 
+      LPF d2_kit_ability_adder INT_VAR level=15 passive=1 STR_VAR resource=~SPCL924~ END
+      LPF d2_kit_ability_adder INT_VAR level=18 passive=1 STR_VAR resource=~SPCL925~ END
+      LPF d2_kit_ability_adder INT_VAR level=21 passive=1 STR_VAR resource=~SPCL926~ END
+      LPF d2_kit_ability_adder INT_VAR level=24 passive=1 STR_VAR resource=~SPCL927~ END
+    END
+END
 
 
 

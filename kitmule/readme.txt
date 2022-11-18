@@ -52,6 +52,9 @@ Notes:
 - uses 2DA_MISSING_COLS function by K4thos (https://github.com/K4thos/IE-code-repository)
 - LibIconv (http://gnuwin32.sourceforge.net/packages/libiconv.htm)
 
+v1.2
+- Fix for "Recreate abilities table" component (broke in the last update)
+
 v1.1
 - Added French translation by 11jo
 - Each kit has a separate abilities table now
