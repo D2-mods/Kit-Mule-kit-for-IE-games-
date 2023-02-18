@@ -1,6 +1,7 @@
 BACKUP ~weidu_external/backup/kitmule~
 AUTHOR ~Dan_P~
 VERSION ~1.2~
+AUTO_EVAL_STRINGS
 
 ALWAYS
   ACTION_BASH_FOR ~%MOD_FOLDER%/lib~ ~.*\.tpa~ BEGIN    // function list
@@ -31,8 +32,6 @@ ALWAYS
 
   CLEAR_INLINED
 END
-
-AUTO_EVAL_STRINGS
 
 LANGUAGE ~English~
          ~english~
